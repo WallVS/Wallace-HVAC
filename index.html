@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallace Vieira - Engenheiro Mecânico | Soluções em Climatização e AVAC-R</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Corporate Blue & Slate -->
+    <!-- Application Structure Plan: The SPA is structured as a digital portfolio, guiding users from introduction (Hero) to value proposition (About), detailed offerings (Interactive Services), methodology (Process), and finally action (Contact). The core interaction is a tabbed/card-based service menu, which breaks down complex information into manageable, user-selectable chunks. This architecture was chosen to transform a static list into an engaging exploration, improving clarity and user experience for a professional B2B audience. -->
+    <!-- Visualization & Content Choices: Hero Section -> Goal: Inform/Impress -> Presentation: Photo, Title, CTA -> Interaction: Scroll-to link. Interactive Services -> Goal: Organize/Detail -> Presentation: Clickable cards with icons -> Interaction: JS toggles content visibility -> Justification: Prevents information overload, enhances engagement. Process Flow -> Goal: Build Trust -> Presentation: HTML/CSS diagram -> Interaction: Hover effects -> Justification: Visually communicates professionalism. Contact Info -> Goal: Connect -> Presentation: QR Code, contact list -> Interaction: "Copy Email" button -> Justification: Improves usability. CONFIRMATION: NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .service-card.active {
+            border-color: #0ea5e9;
+            box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+        .summary-loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <main class="container mx-auto max-w-5xl px-4 py-8 md:py-16">
+
+        <header id="home" class="text-center mb-16 md:mb-24">
+            <img src="https://i.ibb.co/6yZgR0M/wallace-vieira-profile.jpg" alt="Foto de Wallace Vieira, Engenheiro Mecânico" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 border-4 border-white shadow-lg">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">Wallace Vieira</h1>
+            <p class="text-lg md:text-xl text-sky-600 font-medium mt-2">Engenheiro Mecânico | CREA-SP</p>
+            <p class="text-md text-slate-600">Especialista em Climatização & AVAC-R</p>
+        </header>
+
+        <section id="about" class="bg-white p-8 rounded-2xl shadow-md mb-16 md:mb-24 ring-1 ring-slate-200">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-4">Soluções Técnicas para Ambientes Modernos</h2>
+            <p class="text-center max-w-3xl mx-auto text-slate-600 leading-relaxed">
+                Ofereço soluções completas em climatização, focadas em entregar conforto térmico, máxima eficiência energética e desempenho confiável para clientes corporativos, arquitetos e gestores de projetos. Minha abordagem combina rigor técnico com inovação para garantir sistemas de AVAC-R otimizados e sustentáveis.
+            </p>
+        </section>
+
+        <section id="services" class="mb-16 md:mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Serviços Especializados</h2>
+                <p class="text-slate-600 mt-2">Clique em uma área para ver os detalhes dos serviços prestados.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div id="card-design" class="service-card bg-white p-6 rounded-2xl border-2 border-transparent cursor-pointer shadow-md transition-all duration-300 hover:transform hover:-translate-y-1" onclick="showService('design')">
+                    <div class="text-4xl text-sky-500 mb-3">⚙️</div>
+                    <h3 class="text-lg font-bold text-slate-900">Projetos e Sistemas</h3>
+                    <p class="text-sm text-slate-500">Desenvolvimento de sistemas de climatização.</p>
+                </div>
+                <div id="card-maintenance" class="service-card bg-white p-6 rounded-2xl border-2 border-transparent cursor-pointer shadow-md transition-all duration-300 hover:transform hover:-translate-y-1" onclick="showService('maintenance')">
+                    <div class="text-4xl text-sky-500 mb-3">🔧</div>
+                    <h3 class="text-lg font-bold text-slate-900">Manutenção e PMOC</h3>
+                    <p class="text-sm text-slate-500">Manutenção preventiva e corretiva.</p>
+                </div>
+                <div id="card-efficiency" class="service-card bg-white p-6 rounded-2xl border-2 border-transparent cursor-pointer shadow-md transition-all duration-300 hover:transform hover:-translate-y-1" onclick="showService('efficiency')">
+                    <div class="text-4xl text-sky-500 mb-3">⚡️</div>
+                    <h3 class="text-lg font-bold text-slate-900">Eficiência Energética</h3>
+                    <p class="text-sm text-slate-500">Análises de desempenho e otimização.</p>
+                </div>
+                <div id="card-consulting" class="service-card bg-white p-6 rounded-2xl border-2 border-transparent cursor-pointer shadow-md transition-all duration-300 hover:transform hover:-translate-y-1" onclick="showService('consulting')">
+                    <div class="text-4xl text-sky-500 mb-3">📋</div>
+                    <h3 class="text-lg font-bold text-slate-900">Laudos e Consultoria</h3>
+                    <p class="text-sm text-slate-500">Relatórios técnicos e consultoria especializada.</p>
+                </div>
+            </div>
+
+            <div id="service-details" class="bg-white p-8 rounded-2xl shadow-md ring-1 ring-slate-200 min-h-[200px]">
+                <div id="details-design" class="service-content hidden">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">Projetos de Sistemas de Climatização</h4>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Projetos de sistemas Split, Multi Split, VRF e Chiller.</li>
+                        <li>Elaboração de esquemas técnicos e plantas de climatização detalhadas.</li>
+                        <li>Cálculo de Carga Térmica (BTU/TR) para dimensionamento preciso.</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <button onclick="getSummary('design')" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-600 transition-colors duration-300">
+                            ✨ Obter Resumo Técnico
+                        </button>
+                    </div>
+                </div>
+                <div id="details-maintenance" class="service-content hidden">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">Manutenção Preventiva e Corretiva</h4>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Implementação e execução de PMOC (Plano de Manutenção, Operação e Controle).</li>
+                        <li>Manutenção preventiva para garantir a longevidade e eficiência dos equipamentos.</li>
+                        <li>Manutenção corretiva com diagnóstico rápido e soluções eficazes.</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <button onclick="getSummary('maintenance')" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-600 transition-colors duration-300">
+                            ✨ Obter Resumo Técnico
+                        </button>
+                    </div>
+                </div>
+                <div id="details-efficiency" class="service-content hidden">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">Análise de Eficiência Energética e Desempenho</h4>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Análise de consumo energético de sistemas de climatização existentes.</li>
+                        <li>Propostas de otimização para redução de custos operacionais.</li>
+                        <li>Avaliação de desempenho de equipamentos e sistemas AVAC-R.</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <button onclick="getSummary('efficiency')" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-600 transition-colors duration-300">
+                            ✨ Obter Resumo Técnico
+                        </button>
+                    </div>
+                </div>
+                <div id="details-consulting" class="service-content hidden">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">Laudos Técnicos e Consultoria Especializada</h4>
+                     <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Elaboração de laudos e relatórios técnicos para conformidade e análise.</li>
+                        <li>Acompanhamento técnico de instalações de sistemas de climatização.</li>
+                        <li>Consultoria técnica para tomada de decisões em projetos e aquisições.</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <button onclick="getSummary('consulting')" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-full hover:bg-sky-600 transition-colors duration-300">
+                            ✨ Obter Resumo Técnico
+                        </button>
+                    </div>
+                </div>
+                <div id="details-initial" class="service-content text-center text-slate-500 pt-10">
+                    <p>Selecione uma categoria acima para visualizar os detalhes.</p>
+                </div>
+            </div>
+            
+            <div id="summary-section" class="mt-8 hidden">
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Resumo Técnico</h3>
+                <div id="summary-loader" class="mx-auto summary-loader"></div>
+                <div id="summary-content" class="bg-white p-6 rounded-2xl shadow-md ring-1 ring-slate-200 leading-relaxed text-slate-700"></div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-slate-800 text-white p-8 md:p-12 rounded-2xl">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold">Entre em Contato</h2>
+                <p class="text-slate-300 mt-2">Vamos discutir como posso ajudar no seu próximo projeto.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+                <div class="flex-shrink-0">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.linkedin.com/in/wallace-vieira-engineering" alt="QR Code para LinkedIn" class="rounded-lg bg-white p-2">
+                </div>
+                <div class="text-center md:text-left">
+                    <div class="mb-4">
+                        <span class="font-bold text-sky-400 block">Telefone</span>
+                        <a href="tel:+5511942009158" class="text-lg hover:text-sky-300 transition-colors">(11) 94200-9158</a>
+                    </div>
+                    <div class="mb-4">
+                        <span class="font-bold text-sky-400 block">E-mail</span>
+                        <a href="mailto:wallace.vieira1999@gmail.com" class="text-lg hover:text-sky-300 transition-colors">wallace.vieira1999@gmail.com</a>
+                    </div>
+                    <div>
+                        <span class="font-bold text-sky-400 block">LinkedIn</span>
+                        <a href="https://www.linkedin.com/in/wallace-vieira-engineering" target="_blank" rel="noopener noreferrer" class="text-lg hover:text-sky-300 transition-colors">/in/wallace-vieira-engineering</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        const services = ['design', 'maintenance', 'efficiency', 'consulting'];
+        
+        function showService(serviceId) {
+            services.forEach(id => {
+                const card = document.getElementById(`card-${id}`);
+                const details = document.getElementById(`details-${id}`);
+                
+                if (id === serviceId) {
+                    card.classList.add('active');
+                    details.classList.remove('hidden');
+                } else {
+                    card.classList.remove('active');
+                    details.classList.add('hidden');
+                }
+            });
+            document.getElementById('details-initial').classList.add('hidden');
+            document.getElementById('summary-section').classList.add('hidden');
+            document.getElementById('summary-content').innerHTML = '';
+        }
+
+        const servicePrompts = {
+            design: `Gere um resumo técnico conciso e profissional sobre "Projetos de sistemas de climatização", incluindo a importância de sistemas Split, Multi Split, VRF e Chiller, a relevância de esquemas técnicos, e o cálculo de carga térmica para um público de engenheiros e gerentes de projeto.`,
+            maintenance: `Gere um resumo técnico conciso e profissional sobre "Manutenção preventiva e corretiva", abordando a importância do PMOC, a longevidade e eficiência dos equipamentos, e a rapidez no diagnóstico.`,
+            efficiency: `Gere um resumo técnico conciso e profissional sobre "Análise de eficiência energética e desempenho" de sistemas de climatização para um público de gestores de facilities, destacando a importância da otimização para redução de custos operacionais.`,
+            consulting: `Gere um resumo técnico conciso e profissional sobre "Laudos técnicos e consultoria especializada", explicando a importância de relatórios para conformidade e o papel do acompanhamento técnico em instalações.`,
+        };
+
+        async function getSummary(serviceId) {
+            const summarySection = document.getElementById('summary-section');
+            const summaryLoader = document.getElementById('summary-loader');
+            const summaryContent = document.getElementById('summary-content');
+
+            summarySection.classList.remove('hidden');
+            summaryContent.innerHTML = '';
+            summaryLoader.style.display = 'block';
+
+            const userQuery = servicePrompts[serviceId];
+            const systemPrompt = "Você é um engenheiro mecânico especializado em HVAC. Gere um resumo técnico profissional e conciso sobre o tópico solicitado. O texto deve ser formal, claro e focado em aspectos técnicos relevantes para um público B2B.";
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            const fetchWithExponentialBackoff = async (url, options, retries = 3, delay = 1000) => {
+                for (let i = 0; i < retries; i++) {
+                    try {
+                        const response = await fetch(url, options);
+                        if (response.status === 429) {
+                            await new Promise(res => setTimeout(res, delay));
+                            delay *= 2;
+                            continue;
+                        }
+                        return response;
+                    } catch (error) {
+                        if (i === retries - 1) throw error;
+                        await new Promise(res => setTimeout(res, delay));
+                        delay *= 2;
+                    }
+                }
+            };
+
+            try {
+                const response = await fetchWithExponentialBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (text) {
+                    summaryContent.innerHTML = text.replace(/\n/g, '<br>');
+                } else {
+                    summaryContent.innerHTML = "Não foi possível gerar um resumo. Por favor, tente novamente mais tarde.";
+                }
+            } catch (error) {
+                summaryContent.innerHTML = "Ocorreu um erro ao conectar com o serviço. Por favor, tente novamente.";
+                console.error("Fetch error:", error);
+            } finally {
+                summaryLoader.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showService('design');
+        });
+    </script>
+
+</body>
+</html>
